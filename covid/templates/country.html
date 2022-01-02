@@ -1,0 +1,33 @@
+{% extends "base.html" %} 
+
+{% load static %} 
+
+{% block title %} Covid tracker {% endblock %} 
+
+{% block body %}
+<h1>{{ country }}</h1>
+<table class="table table-dark table-striped rounded">
+  <thead>
+    <tr>
+      <th scope="col">Confirmed cases</th>
+      <th scope="col">Recovered cases</th>
+      <th scope="col">Confirmed deaths :(</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{ data.confirmed.value }}</th>
+      <td><span style="color: red">error</span></td>
+      <td>{{ data.deaths.value }}</td>
+    </tr>
+  </tbody>
+</table>
+<br><br><br><hr>
+<h3>Countries</h3>
+<select id="countries" class="form-select" name="countries" onchange="this.options[this.selectedIndex].value && (window.location = '/country/' + this.options[this.selectedIndex].value);"> 
+{% for country in countries.countries %}
+<option value="{{ country.name }}">{{ country.name }}</option>
+{% endfor %}
+</select>
+<hr>
+{% endblock %}
